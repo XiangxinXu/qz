@@ -3,7 +3,10 @@ import logging
 
 from django.http import JsonResponse
 from django.shortcuts import render
-from wxcloudrun.models import Counters
+from django.views import View
+from wxcloudrun.models import User
+from django.core.exceptions import ObjectDoesNotExist
+import requests
 
 
 logger = logging.getLogger('log')
@@ -15,24 +18,70 @@ def index(request, _):
 
      `` request `` 请求对象
     """
-
     return render(request, 'index.html')
 
-def register(request, _):
-    '''
-    注册
-    '''
-    logger.info('req: {}'.format(request.body))
+class UserView(View):
+    wx_num = ''
+    wx_nck = ''
+    telephone = ''
+    introducer = None
+    score_nowithdraw = 0
+    score_withdrawable = 0
 
-    body_unicode = request.body.decode('utf-8')
-    body = json.loads(body_unicode)
+    def post(self, request, _):
+        '''
+        注册
+        '''
+        # logger.info('req: {}'.format(request.body))
+        
+        try:
+            body_unicode = request.body.decode('utf-8')
+            body = json.loads(body_unicode)
 
-    wx_num = body["wx_num"]
-    wx_nck = body["wx_nck"]
-    telephone = body['telephone']
+            self.wx_num = body["wx_num"]
+            self.wx_nck = body["wx_nck"]
+            self.telephone = body['telephone']
+            self.introducer = body['intro']
+        except:
+            return JsonResponse({'error': '哦吼，网络开小差了！'})
 
-    return render(request, "success.html")
-    
+        if self.existed():
+            return JsonResponse({'msg': '用户已存在！'})
+        else:
+            
+            if self.introducer == '':
+                self.introducer = None
+            else:             
+                res1 = User.objects.filter(telephone=self.introducer)
+                res2 = User.objects.filter(user_name=self.introducer)
+                if res1.exists():
+                    self.introducer = res1[0]
+                elif res2.exists():
+                    self.introducer = res2[0]
+                else:
+                    return JsonResponse({'error': '介绍人不存在！'})
+            
+            user = User.objects.create(user_name=self.wx_num, nick_name=self.wx_nck, telephone=self.telephone, introducer=self.introducer)
+            user.save()
+            return JsonResponse({'msg': '恭喜您注册成功！'})     
+
+    def existed(self):
+        try:
+            res = User.objects.get(user_name=self.wx_num)
+            return True
+        except ObjectDoesNotExist:
+            return False
+
+    def get(self, request, user_n):
+        
+        user = User.objects.get(user_name=user_n)     
+        print('x')
+        ctx = {'uname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}
+        # response = requests.get("http://api.weixin.qq.com/wxa/getwxadevinfo")
+        # print(response)
+        return render(request, 'user_info.html', context=ctx)
+
+
 # def counter(request, _):
 #     """
 #     获取当前计数

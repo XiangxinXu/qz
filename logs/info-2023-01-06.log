@@ -1,0 +1,3 @@
+[2023-01-06 22:03:56,792] [views.py:33] [views:post] [INFO]- req: b'{"wx_num":"wx181283ok","wx_nck":"dsifo;;;;;id","telephone":"15111134343","intro":"23333333"}'
+[2023-01-06 22:24:55,413] [views.py:33] [views:post] [INFO]- req: b'{"wx_num":"wx181283ok","wx_nck":"kkk","telephone":"15444446666","intro":"233"}'
+[2023-01-06 22:26:43,061] [views.py:33] [views:post] [INFO]- req: b'{"wx_num":"wx181283ok","wx_nck":"dsifo;;;;;id","telephone":"16555554444","intro":"23"}'

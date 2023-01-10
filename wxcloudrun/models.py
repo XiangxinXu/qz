@@ -1,17 +1,14 @@
-from datetime import datetime
-
 from django.db import models
 
 
 # Create your models here.
-class Counters(models.Model):
-    id = models.AutoField
-    count = models.IntegerField(max_length=11, default=0)
-    createdAt = models.DateTimeField(default=datetime.now(), )
-    updatedAt = models.DateTimeField(default=datetime.now(),)
-
-    def __str__(self):
-        return self.title
+class User(models.Model):
+    user_name = models.CharField(max_length=200, primary_key=True)
+    nick_name = models.CharField(max_length=200, blank=True)
+    telephone = models.CharField(max_length=20, null=False, blank=False)
+    introducer= models.ForeignKey('self', null=True, default=None, on_delete=models.SET_DEFAULT)
+    score_nowithdraw = models.IntegerField(default=0)
+    score_withdrawable = models.IntegerField(default=0)
 
     class Meta:
-        db_table = 'Counters'  # 数据库表名
+        db_table = 'User'
