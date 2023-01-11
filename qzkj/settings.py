@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'wxcloudrun'
+    'qzkj'
 ]
 
 MIDDLEWARE = [
@@ -43,7 +43,7 @@ MIDDLEWARE = [
 ]
 
 
-ROOT_URLCONF = 'wxcloudrun.urls'
+ROOT_URLCONF = 'qzkj.urls'
 
 TEMPLATES = [
     {
@@ -61,7 +61,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'wxcloudrun.wsgi.application'
+WSGI_APPLICATION = 'qzkj.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -170,7 +170,7 @@ LOGGING = {
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 

@@ -4,7 +4,7 @@ import logging
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
-from wxcloudrun.models import User
+from qzkj.models import User
 from django.core.exceptions import ObjectDoesNotExist
 import requests
 
@@ -77,8 +77,8 @@ class UserView(View):
         user = User.objects.get(user_name=user_n)     
         print('x')
         ctx = {'uname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}
-        response = requests.get("http://api.weixin.qq.com/wxa/getwxadevinfo")
-        print(response)
+        # response = requests.get("http://api.weixin.qq.com/wxa/getwxadevinfo")
+        # print(response)
         return render(request, 'user_info.html', context=ctx)
 
 

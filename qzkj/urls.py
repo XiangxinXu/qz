@@ -14,20 +14,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from wxcloudrun.views import UserView
-from wxcloudrun import views
+from qzkj.views import UserView
+from qzkj import views
 from django.conf.urls import url
+from django.contrib import admin
 from django.urls import path, re_path
 
 urlpatterns = [
     # 计数器接口
     # url(r'^^api/count(/)?$', views.counter),
+    re_path(r'^admin(/)?', admin.site.urls),
 
     re_path(r'^register(/)?$', UserView.as_view()),
     re_path(r'^user_info/(?P<user_n>.+)(/)?$', UserView.as_view()),
 
     # 获取主页
     re_path(r'^(/)?$', views.index),
+
 
     
 ]
