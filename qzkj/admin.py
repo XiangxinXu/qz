@@ -4,4 +4,8 @@ from .models import User
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    readonly_fields = ('user_name','nick_name', 'telephone', 'introducer',)
+    list_display = ('nick_name', 'telephone', 'introducer', 'score_nowithdraw', 'score_withdrawable')
+    readonly_fields = ('user_name', 'nick_name', 'telephone', 'introducer',)
+    search_fields = ('nick_name', 'telephone')
+
+    

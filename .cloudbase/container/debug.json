@@ -4,7 +4,7 @@
       "name": "qz",
       "domain": "",
       "ip": "",
-      "containerId": "3ee736cb010ab963af4a3158875a3ecb60b4399128da78c68cc295e5583dddd3"
+      "containerId": "708622987d97b4227dba3c051028f38bab388f171472571e7a398d8e36e8905c"
     }
   ],
   "config": {
@@ -29,7 +29,7 @@
       "envParams": {
         "MYSQL_USERNAME": "qzdev",
         "MYSQL_PASSWORD": "Qz123456",
-        "MYSQL_ADDRESS": "sh-cynosdbmysql-grp-cjnx256e.sql.tencentcdb.com:21912"
+        "MYSQL_ADDRESS": "10.9.100.252:3306"
       },
       "customLogs": "stdout",
       "initialDelaySeconds": 2,
