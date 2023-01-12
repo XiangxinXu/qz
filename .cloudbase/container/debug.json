@@ -4,7 +4,8 @@
       "name": "qz",
       "domain": "",
       "ip": "",
-      "containerId": "708622987d97b4227dba3c051028f38bab388f171472571e7a398d8e36e8905c"
+      "mode": "compose",
+      "containerId": "a612d189d6d35e0bd7ae46bd9fc3567124f2883b8f794928cd19cc8ffb221edd"
     }
   ],
   "config": {
