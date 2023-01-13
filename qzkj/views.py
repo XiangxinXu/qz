@@ -1,7 +1,7 @@
 import json
 import logging
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views import View
 from qzkj.models import User
@@ -11,6 +11,11 @@ import requests
 
 logger = logging.getLogger('log')
 
+
+def verify(request, _):
+    f = open('.MP_verify_yxSL8Vl2Cy7VfcHP.txt', 'r')
+    str = f.readline()
+    return HttpResponse(str)
 
 def index(request, _):
     """
