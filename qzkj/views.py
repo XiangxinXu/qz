@@ -13,7 +13,7 @@ logger = logging.getLogger('log')
 
 
 def verify(request, _):
-    f = open('/MP_verify_yxSL8Vl2Cy7VfcHP.txt', 'r')
+    f = open('./MP_verify_yxSL8Vl2Cy7VfcHP.txt', 'r')
     str = f.readline()
     return HttpResponse(str)
 
