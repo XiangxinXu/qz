@@ -20,6 +20,15 @@ def index(request, _):
     """
     return render(request, 'index.html')
 
+
+def wxuser_auth(request, _):
+    print(request)
+    url = "http://api.weixin.qq.com/sns/userinfo?openid="+request.headers['x-wx-openid']
+    response = requests.get(url)
+    print(response)
+    return JsonResponse(response)
+
+
 class UserView(View):
     wx_num = ''
     wx_nck = ''
@@ -72,13 +81,10 @@ class UserView(View):
         except ObjectDoesNotExist:
             return False
 
-    def get(self, request, user_n):
-        
+    def get(self, request, user_n):      
         user = User.objects.get(user_name=user_n)     
-        print('x')
         ctx = {'uname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}
-        # response = requests.get("http://api.weixin.qq.com/wxa/getwxadevinfo")
-        # print(response)
+        
         return render(request, 'user_info.html', context=ctx)
 
 
