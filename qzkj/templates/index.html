@@ -53,7 +53,7 @@
       // 向云托管服务发起调用
       const callres = await window.app.callContainer({
         path: '/wxuser_auth',                       // 填入业务自定义路径和参数，根目录，就是 / 
-        method: 'GET',                     // 按照自己的业务开发，选择对应的方法
+        method: 'GET' ,                     // 按照自己的业务开发，选择对应的方法
         header: {
           'content-type': 'application/json',
           'X-WX-SERVICE': 'django-cihh',            // xxx中填入服务名称（微信云托管 - 服务管理 - 服务列表 - 服务名称）
