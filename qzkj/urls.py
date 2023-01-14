@@ -25,7 +25,10 @@ urlpatterns = [
     # url(r'^^api/count(/)?$', views.counter),
     re_path(r'^admin(/)?', admin.site.urls),
 
-    re_path(r'^MP_verify(.)*', views.verify),
+    # 网站验证文件
+    re_path(r'^MP_verify_yxSL8Vl2Cy7VfcHP.txt', views.verify),
+
+
     re_path(r'^wxuser_auth(/)?', views.wxuser_auth),
     re_path(r'^register(/)?$', UserView.as_view()),
     re_path(r'^user_info/(?P<user_n>.+)(/)?$', UserView.as_view()),
