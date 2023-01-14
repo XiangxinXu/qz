@@ -1,19 +1,20 @@
 import json
 import logging
+import os
+import requests
 
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views import View
 from qzkj.models import User
 from django.core.exceptions import ObjectDoesNotExist
-import requests
 from qzkj.settings import BASE_DIR
 
 logger = logging.getLogger('log')
 
 
 def verify(request):
-    with open(BASE_DIR + 'MP_verify_yxSL8Vl2Cy7VfcHP.txt', 'r') as f:
+    with open(os.path.join(BASE_DIR, 'MP_verify_yxSL8Vl2Cy7VfcHP.txt'), 'r') as f:
         str = f.readline()
     return HttpResponse(str)
 
