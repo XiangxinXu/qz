@@ -7,7 +7,7 @@ from django.views import View
 from qzkj.models import User
 from django.core.exceptions import ObjectDoesNotExist
 import requests
-import qzkj.settings
+from qzkj.settings import BASE_DIR
 
 logger = logging.getLogger('log')
 
