@@ -7,13 +7,13 @@ from django.views import View
 from qzkj.models import User
 from django.core.exceptions import ObjectDoesNotExist
 import requests
-
+import qzkj.settings
 
 logger = logging.getLogger('log')
 
 
 def verify(request):
-    with open('MP_verify_yxSL8Vl2Cy7VfcHP.txt', 'r') as f:
+    with open(settings.BASE_DIR + 'MP_verify_yxSL8Vl2Cy7VfcHP.txt', 'r') as f:
         str = f.readline()
     return HttpResponse(str)
 
