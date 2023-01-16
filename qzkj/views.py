@@ -4,7 +4,7 @@ import os
 import requests
 
 from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from qzkj.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -17,6 +17,9 @@ def verify(request):
     with open(os.path.join(BASE_DIR, 'MP_verify_yxSL8Vl2Cy7VfcHP.txt'), 'r') as f:
         str = f.readline()
     return HttpResponse(str)
+
+def wx_OAuth(request, dirstr):
+    return redirect("https://servicewechat.com/wxa-qbase/"+dirstr)
 
 def index(request, _):
     """
