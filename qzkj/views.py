@@ -18,8 +18,8 @@ def verify(request):
         str = f.readline()
     return HttpResponse(str)
 
-def wx_OAuth(request, dirstr):
-    return redirect("https://servicewechat.com/wxa-qbase/"+dirstr)
+# def wx_OAuth(request, dirstr):
+#     return redirect("https://servicewechat.com/wxa-qbase/"+dirstr)
 
 def index(request, _):
     """
