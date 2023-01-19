@@ -19,7 +19,6 @@ from qzkj import views
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, re_path
-from revproxy.views import ProxyView
 
 
 urlpatterns = [
@@ -30,9 +29,8 @@ urlpatterns = [
     # 网站验证文件
     re_path(r'^MP_verify_yxSL8Vl2Cy7VfcHP.txt', views.verify),
     # 网站微信授权
-    #re_path(r'^__wx__/(?P<dirstr>.*)', views.wx_OAuth),
-    re_path(r'^__wx__/(?P<path>.*)$', ProxyView.as_view(upstream='https://servicewechat.com/wxa-qbase/', add_remote_user=True)),
-
+    re_path(r'^__wx__/(?P<dirstr>.*)', views.wx_OAuth),
+   
     re_path(r'^wxuser_auth(/)?', views.wxuser_auth),
     re_path(r'^register(/)?$', UserView.as_view()),
     re_path(r'^user_info/(?P<user_n>.+)(/)?$', UserView.as_view()),
