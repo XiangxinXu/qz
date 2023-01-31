@@ -46,7 +46,6 @@
       signature: object[string] // envid、signature参数存在并成功初始化后，返回的签名信息
       info: string              // 如果snsapi_userinfo登录，则会返回用户信息的cloudID，可以使用转换接口获取信息，见下文
     */
-    console.log(result)
     window.alert(result);
     if (result.ret === 0) {                 // ret为0时，代表登录已经完成，可以进行业务操作
       window.app = result.cloud;             // result.cloud 返回初始化可操作的 cloud 函数对象，将其放置全局

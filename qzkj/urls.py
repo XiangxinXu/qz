@@ -28,8 +28,6 @@ urlpatterns = [
 
     # 网站验证文件
     re_path(r'^MP_verify_yxSL8Vl2Cy7VfcHP.txt', views.verify),
-    # 网站微信授权
-    #re_path(r'^__wx__/(?P<dirstr>.*)', views.wx_OAuth),
    
     re_path(r'^wxuser_auth(/)?', views.wxuser_auth),
     re_path(r'^register(/)?$', UserView.as_view()),

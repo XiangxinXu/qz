@@ -18,9 +18,6 @@ def verify(request):
         str = f.readline()
     return HttpResponse(str)
 
-# def wx_OAuth(request, dirstr):
-#     return redirect("https://servicewechat.com/wxa-qbase/"+dirstr)
-
 def index(request, _):
     """
     获取主页
@@ -31,11 +28,10 @@ def index(request, _):
 
 
 def wxuser_auth(request, _):
-    print(request)
     url = "http://api.weixin.qq.com/sns/userinfo?openid="+request.headers['x-wx-openid']
     response = requests.get(url)
-    print(response)
-    return JsonResponse(response)
+    logger.info(response.text)
+    return JsonResponse(response.json())
 
 
 class UserView(View):
