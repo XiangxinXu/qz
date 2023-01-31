@@ -3,7 +3,8 @@
     {
       "name": "qz",
       "domain": "",
-      "ip": ""
+      "ip": "",
+      "containerId": "e7ef3fc22d3a1de3a663efce43bb3d38b7d02706107c6412da590dddd6e6c5c8"
     }
   ],
   "config": {
@@ -28,15 +29,14 @@
       "envParams": {
         "MYSQL_USERNAME": "qzdev",
         "MYSQL_PASSWORD": "Qz123456",
-        "MYSQL_ADDRESS": "10.9.100.252:3306"
+        "MYSQL_ADDRESS": "sh-cynosdbmysql-grp-cjnx256e.sql.tencentcdb.com:21912"
       },
       "customLogs": "stdout",
       "initialDelaySeconds": 2,
       "dataBaseName": "django_demo",
       "executeSQLs": [
         "CREATE DATABASE IF NOT EXISTS django_demo;",
-        "USE django_demo;",
-        "CREATE TABLE IF NOT EXISTS `Counters` (`id` int(11) NOT NULL AUTO_INCREMENT, `count` int(11) NOT NULL DEFAULT 1, `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET = utf8;"
+        "USE django_demo;"
       ]
     }
   }

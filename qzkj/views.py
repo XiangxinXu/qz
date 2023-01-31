@@ -29,12 +29,6 @@ def index(request, _):
     """
     return render(request, 'index.html')
 
-def django_health_check():
-    """
-    django 正常启动
-    """
-	return "success"
-
 
 def wxuser_auth(request, _):
     print(request)
