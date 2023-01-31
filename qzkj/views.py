@@ -31,6 +31,7 @@ def wxuser_auth(request, _):
     url = "http://api.weixin.qq.com/sns/userinfo?openid="+request.headers['x-wx-openid']
     response = requests.get(url)
     logger.info(response.text)
+    logger.info(request)
     return JsonResponse(response.json())
 
 
