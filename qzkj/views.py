@@ -28,7 +28,7 @@ def index(request, _):
 
 
 def wxuser_auth(request, _):
-    url = "http://api.weixin.qq.com/sns/userinfo?openid="+request.headers['x-wx-openid']
+    url = "https://api.weixin.qq.com/cgi-bin/user/info?openid={}&lang=zh_CN".format(request.headers['x-wx-openid'])
     response = requests.get(url)
     logger.info(response.text)
     logger.info(request.headers)
