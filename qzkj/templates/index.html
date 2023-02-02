@@ -49,17 +49,19 @@
     window.alert("登录成功了吗？" + result.ret);
     if (result.ret === 0) {                 // ret为0时，代表登录已经完成，可以进行业务操作
       window.app = result.cloud;             // result.cloud 返回初始化可操作的 cloud 函数对象，将其放置全局
-
-      // 向云托管服务发起调用
+      window.alert(result.info);
+      
+      向云托管服务发起调用
       const callres = await window.app.callContainer({
         path: '/wxuser_auth',                       // 填入业务自定义路径和参数，根目录，就是 / 
         method: 'GET' ,                     // 按照自己的业务开发，选择对应的方法
         header: {
           'content-type': 'application/json',
-          'X-WX-SERVICE': 'django-cihh',            // xxx中填入服务名称（微信云托管 - 服务管理 - 服务列表 - 服务名称）
+          'X-WX-SERVICE': 'django-cihh',            // 服务名称（微信云托管 - 服务管理 - 服务列表 - 服务名称）
         },
         // 其余参数同 wx.request
       });
+
       console.log(callres);
       window.alert("云托管返回：" + callres);
       // // 使用微信公众号SDK，开始签名，签名信息在 result.signature 中
