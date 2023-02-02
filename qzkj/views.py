@@ -28,16 +28,15 @@ def index(request, _):
 
 
 def wxuser_auth(request, _):
-    url = "https://api.weixin.qq.com/cgi-bin/user/info?openid={}&lang=zh_CN".format(request.headers['x-wx-openid'])
-    response = requests.get(url)
-    logger.info(response.text)
-    logger.info('\nxxx\n')
+    # url = "https://api.weixin.qq.com/cgi-bin/user/info?openid={}&lang=zh_CN".format(request.headers['x-wx-openid'])
+    # response = requests.get(url)
+    # logger.info(response.text)
+    # logger.info('\nxxx\n')
 
     url = "https://api.weixin.qq.com/sns/userinfo?openid={}&lang=zh_CN".format(request.headers['x-wx-openid'])
     response = requests.get(url)
     logger.info(response.text)
     logger.info('\nxxx\n')
-    logger.info(request.headers)
     return JsonResponse(response.json())
 
 
