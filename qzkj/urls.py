@@ -19,7 +19,7 @@ from qzkj import views
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, re_path
-from django.views.generic import TempleteView
+from django.views.generic import TemplateView
 
 
 urlpatterns = [
@@ -34,8 +34,8 @@ urlpatterns = [
     re_path(r'^user_info/(?P<user_n>.+)(/)?$', UserView.as_view()),
 
     # 用户授权相关
-    re_path(r'^(/)?$', TempleteView.as_view(templete_name='user_auth.html')), #请求code
-    re_path(r'^\?code=(?P<code>.+)&state=(?P<state>.+)', views.get_accesstoken) #请求access token
+    re_path(r'^(/)?$', TemplateView.as_view(template_name='user_auth.html')), #请求code
+    re_path(r'^\?code=(?P<code>.+)&state=(?P<state>.+)', views.get_accesstoken), #请求access token
 
 
     # 默认主页
