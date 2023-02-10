@@ -206,7 +206,7 @@
     let obj = {wx_num:$("#js_input1").val(), wx_nck:$("#js_input2").val(), telephone:$("#js_input3").val(), intro:$('#js_input4').val()};
     console.log(obj);
     $.ajax({
-      url: '/register',
+      url: '/register_submit',
       type: 'post',
       data: JSON.stringify(obj),
       contentType: "application/json; charset=utf-8",

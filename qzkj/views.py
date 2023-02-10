@@ -42,28 +42,37 @@ def show_user_info(openid):
     return render(request, 'user_info.html', context=ctx)
 
 
-def get_accesstoken(request, code, state):
-    url = "https://api.weixin.qq.com/sns/oauth2/access_token?\
-    appid=wx71b3d2f26d40ecbc&secret=39ceb0e5030cb2d2ce2d705f75945b67\
-    &code={}&grant_type=authorization_code".format(code)
-    response = requests.get(url)
-    logger.info(response.text)
-    access_token = response['access_token']
-    openid = response['openid']
-
+def get_user_info(access_token, openid):
     url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
     response = requests.get(url)
+    responsedict = json.loads(response)
+    openid = responsedict['openid']
 
     logger.info(response.text)
-    if existed(response['openid']):
-        return show_user_info(response['openid'])
+    if existed(openid):
+        return show_user_info(openid)
     else:
-        return render(request, 'index.html', context=response)
+        return render(request, 'register.html', context=responsedict)
+
+
+def get_accesstoken(request, _):
+    data = request.POST.get(data, None)
+    if data == None:
+        return HttpResponse('code and state not got in server.')
+    url = "https://api.weixin.qq.com/sns/oauth2/access_token?\
+            appid=wx71b3d2f26d40ecbc&secret=39ceb0e5030cb2d2ce2d705f75945b67\
+            &code={}&grant_type=authorization_code".format(data['code'])
+    response = requests.get(url)
+    logger.info(response.text)
+    response = json.loads(response)
+    access_token = response['access_token']
+    openid = response['openid']
+    get_user_info(access_token, openid)
 
 
 class UserView(View):
-    wx_num = ''
-    wx_nck = ''
+    openid = ''
+    nickname = ''
     telephone = ''
     introducer = None
     score_nowithdraw = 0
@@ -79,32 +88,31 @@ class UserView(View):
             body_unicode = request.body.decode('utf-8')
             body = json.loads(body_unicode)
 
-            self.wx_num = body["wx_num"]
-            self.wx_nck = body["wx_nck"]
+            self.openid = body["wx_num"]
+            self.nickname = body["wx_nck"]
             self.telephone = body['telephone']
             self.introducer = body['intro']
         except:
-            return JsonResponse({'error': '哦吼，网络开小差了！'})
-
-        if self.existed():
-            return JsonResponse({'msg': '用户已存在！'})
-        else:
+            return JsonResponse({'error': '哦吼，网络开小差了！'})  
             
-            if self.introducer == '':
-                self.introducer = None
-            else:             
-                res1 = User.objects.filter(telephone=self.introducer)
-                res2 = User.objects.filter(user_name=self.introducer)
-                if res1.exists():
-                    self.introducer = res1[0]
-                elif res2.exists():
-                    self.introducer = res2[0]
-                else:
-                    return JsonResponse({'error': '介绍人不存在！'})
-            
-            user = User.objects.create(user_name=self.wx_num, nick_name=self.wx_nck, telephone=self.telephone, introducer=self.introducer)
-            user.save()
-            return JsonResponse({'msg': '恭喜您注册成功！'})     
+        if self.introducer == '':
+            self.introducer = None
+        else:             
+            res1 = User.objects.filter(telephone=self.introducer)
+            if res1.exists():
+                self.introducer = res1[0]
+            else:
+                return JsonResponse({'error': '介绍人不存在！'})
+            # nickname = response['nickname']
+            # sex = response['sex']
+            # province = response['province']
+            # city = response['city']
+            # country = response['country']
+            # headimgurl = response['headimgurl']
+        
+        user = User.objects.create(user_name=self.wx_num, nick_name=self.wx_nck, telephone=self.telephone, introducer=self.introducer)
+        user.save()
+        return JsonResponse({'msg': '恭喜您注册成功！'})     
 
     
 
