@@ -18,10 +18,8 @@ def verify(request):
         str = f.readline()
     return HttpResponse(str)
 
-def index(request, _):
+def register(request, _):
     """
-    获取主页,默认注册页
-
      `` request `` 请求对象
     """
     return render(request, 'index.html')

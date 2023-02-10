@@ -17,34 +17,35 @@
                                 "redirect_uri=https%3A%2F%2Fdjango-cihh-20134-6-1315334785.sh.run.tcloudbase.com/user_auth.html&"+
                                 "response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
         }
-        
-        function getUrlParam(name) {
-            //构造一个含有目标参数的正则表达式对象
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-            //匹配目标参数
-            var r = window.location.search.substr(1).match(reg);
-            //返回参数值
-            if(r != null) {
-                return decodeURI(r[2]);
-            }
-            return null;
-        }
-
-        let code = getUrlParam("code");
-        let state = getUrlParam("state");
-        let context = {'code':code, 'state':state};
-        if (code != null) {
-            window.alert(code);
-            $.ajax({
-                url: '/get_access_token',
-                type: 'post',
-                data: JSON.stringify(context),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-            }).done().fail();
-        }
         else{
-            window.alert("用户授权code获取失败！");
+            function getUrlParam(name) {
+                //构造一个含有目标参数的正则表达式对象
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                //匹配目标参数
+                var r = window.location.search.substr(1).match(reg);
+                //返回参数值
+                if(r != null) {
+                    return decodeURI(r[2]);
+                }
+                return null;
+            }
+
+            let code = getUrlParam("code");
+            let state = getUrlParam("state");
+            let context = {'code':code, 'state':state};
+            if (code != null) {
+                window.alert(code);
+                $.ajax({
+                    url: '/get_access_token',
+                    type: 'post',
+                    data: JSON.stringify(context),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                }).done().fail();
+            }
+            else{
+                window.alert("用户授权code获取失败！");
+            }
         }
     </script>
 </body>
