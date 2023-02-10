@@ -15,7 +15,7 @@
   <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
   <script src="https://web-9gikcbug35bad3a8-1304825656.tcloudbaseapp.com/sdk/1.3.0/cloud.js"></script>
   <script src="https://web-9gikcbug35bad3a8-1304825656.tcloudbaseapp.com/sdk/1.3.1/mplogin.min.js"></script>
-  <script>
+  <!-- <script>
   window.onload = async function () {
   // 使用登录模块，传入信息开始授权登录过程
   // 如果首次登录，页面会经历一系列跳转过程，请不要在登录前加业务处理代码，以免登录被中断。
@@ -87,7 +87,7 @@
       window.alert(result.msg);
     }
   }
-  </script>
+  </script> -->
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Droid Sans", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
@@ -158,13 +158,13 @@
             <label for="js_input1" class="weui-cell weui-cell_active">
               <div class="weui-cell__hd"><span class="weui-label">微信号</span></div>
               <div class="weui-cell__bd">
-                  <input id="js_input1" class="weui-input" placeholder="填写本人微信号"/>
+                  <input id="js_input1" class="weui-input" value="{{openid}}" disabled/>
               </div>
             </label>
             <label for="js_input2" class="weui-cell weui-cell_active">
               <div class="weui-cell__hd"><span class="weui-label">昵称</span></div>
               <div class="weui-cell__bd">
-                  <input id="js_input2" class="weui-input" placeholder="填写本人微信号的昵称"/>
+                  <input id="js_input2" class="weui-input" value="{{nickname}}" disabled/>
               </div>
             </label>
             <label for="js_input3" class="weui-cell weui-cell_active">
@@ -176,7 +176,7 @@
             <label for="js_input4" class="weui-cell weui-cell_active">
               <div class="weui-cell__hd"><span class="weui-label">推荐人</span><div class="weui-cell__desc">选填</div></div>
               <div class="weui-cell__bd">
-                  <input id="js_input4" class="weui-input" placeholder="填写推荐人微信或手机" />
+                  <input id="js_input4" class="weui-input" placeholder="填写推荐人手机号" />
               </div>
             </label>
           </div>

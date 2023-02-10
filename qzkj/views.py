@@ -20,24 +20,45 @@ def verify(request):
 
 def index(request, _):
     """
-    获取主页
+    获取主页,默认注册页
 
      `` request `` 请求对象
     """
     return render(request, 'index.html')
 
 
-def wxuser_auth(request, _):
-    # url = "https://api.weixin.qq.com/cgi-bin/user/info?openid={}&lang=zh_CN".format(request.headers['x-wx-openid'])
-    # response = requests.get(url)
-    # logger.info(response.text)
-    # logger.info('\nxxx\n')
+def existed(openid):
+    try:
+        res = User.objects.get(user_name=openid)
+        return True
+    except ObjectDoesNotExist:
+        return False
 
-    url = "https://api.weixin.qq.com/sns/userinfo?openid={}&lang=zh_CN".format(request.headers['x-wx-openid'])
+
+def show_user_info(openid):      
+    user = User.objects.get(user_name=openid)     
+    ctx = {'uname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}
+    
+    return render(request, 'user_info.html', context=ctx)
+
+
+def get_accesstoken(request, code, state):
+    url = "https://api.weixin.qq.com/sns/oauth2/access_token?\
+    appid=wx71b3d2f26d40ecbc&secret=39ceb0e5030cb2d2ce2d705f75945b67\
+    &code={}&grant_type=authorization_code".format(code)
     response = requests.get(url)
     logger.info(response.text)
-    logger.info('\nxxx\n')
-    return JsonResponse(response.json())
+    access_token = response['access_token']
+    openid = response['openid']
+
+    url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
+    response = requests.get(url)
+
+    logger.info(response.text)
+    if existed(response['openid']):
+        return show_user_info(response['openid'])
+    else:
+        return render(request, 'index.html', context=response)
 
 
 class UserView(View):
@@ -85,15 +106,6 @@ class UserView(View):
             user.save()
             return JsonResponse({'msg': '恭喜您注册成功！'})     
 
-    def existed(self):
-        try:
-            res = User.objects.get(user_name=self.wx_num)
-            return True
-        except ObjectDoesNotExist:
-            return False
+    
 
-    def get(self, request, user_n):      
-        user = User.objects.get(user_name=user_n)     
-        ctx = {'uname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}
-        
-        return render(request, 'user_info.html', context=ctx)
+    
