@@ -1,20 +1,16 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 
 <head>
   <meta charset="utf-8" />
 
-  <!-- <link rel="stylesheet" href="{% static 'style/weui.min.css' %}" />
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
   <title>授权页</title>
 </head>
 <body>
     <script>
         window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?"+
                                 "appid=wx71b3d2f26d40ecbc&"+
-                                "redirect_uri=https%3A%2F%2Fdjango-cihh-20134-6-1315334785.sh.run.tcloudbase.com&"+
-                                "response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect&forcePopup=true"
+                                "redirect_uri=https%3A%2F%2Fdjango-cihh-20134-6-1315334785.sh.run.tcloudbase.com%2Findex.html&"+
+                                "response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
     </script>
 </body>
