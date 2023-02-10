@@ -30,7 +30,7 @@ urlpatterns = [
     # 网站验证文件
     re_path(r'^MP_verify_yxSL8Vl2Cy7VfcHP.txt', views.verify),
     
-    re_path(r'^register(/)?$', views.register)
+    re_path(r'^register(/)?$', views.register),
     re_path(r'^register_submit(/)?$', UserView.as_view()),
     re_path(r'^user_info/(?P<user_n>.+)(/)?$', UserView.as_view()),
 
