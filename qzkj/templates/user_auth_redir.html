@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="utf-8" />
+
+  <title>授权页</title>
+</head>
+<body>
+    <script>
+        function getUrlParam(name) {
+            //构造一个含有目标参数的正则表达式对象
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            //匹配目标参数
+            var r = window.location.search.substr(1).match(reg);
+            //返回参数值
+            if(r != null) {
+                return decodeURI(r[2]);
+            }
+            return null;
+        }
+
+        code = getUrlParam("code");
+        state = getUrlParam("state");
+        if (code != null) {
+            window.alert(code);
+            $.ajax({
+                url: '/get_access_token',
+                type: 'post',
+                data: JSON.stringify(code),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+            }).done().fail();
+        }
+        else{
+            window.alert("用户授权code获取失败！");
+        }
+    </script>
+</body>
