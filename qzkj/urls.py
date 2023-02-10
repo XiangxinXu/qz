@@ -35,7 +35,7 @@ urlpatterns = [
 
     # 用户授权相关
     re_path(r'^(/)?$', TemplateView.as_view(template_name='user_auth.html')), #请求code
-    re_path(r'^\?code=(?P<code>.+)&state=(?P<state>.+)', views.get_accesstoken), #请求access token
+    re_path(r'^/?code=(?P<code>.+)&state=(?P<state>.+)', views.get_accesstoken), #请求access token
 
 
     # 默认主页
