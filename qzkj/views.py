@@ -38,7 +38,8 @@ def get_accesstoken(request):
     用code换取access token，然后获取用户资料.
     参考https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html
     '''
-    code = request.POST.get('code', None)
+    data = json.loads(request.body.decode('utf-8'))
+    code = data['code']
     
     logger.info(code)
     if code == None:
