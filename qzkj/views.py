@@ -40,7 +40,7 @@ def get_accesstoken(request):
     '''
     code = request.POST.get('code', None)
     
-    logger.info('xxx\n' + code)
+    logger.info(code)
     if code == None:
         return HttpResponse('code and state not got in server.')
     url = "https://api.weixin.qq.com/sns/oauth2/access_token?\
