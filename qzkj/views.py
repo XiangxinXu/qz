@@ -39,8 +39,7 @@ def get_accesstoken(request):
     参考https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html
     '''
     logger.info(request)
-    logger.info('xxx\n')
-    data = request.POST.get(data, None)
+    data = request.POST.get('data', None)
     if data == None:
         return HttpResponse('code and state not got in server.')
     url = "https://api.weixin.qq.com/sns/oauth2/access_token?\
