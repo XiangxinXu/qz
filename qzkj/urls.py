@@ -35,7 +35,7 @@ urlpatterns = [
     re_path(r'^user_info/(?P<user_n>.+)(/)?$', UserView.as_view()),
 
     # 用户授权相关
-    re_path(r'^user_auth(/)?$', TemplateView.as_view(template_name='user_auth.html'), name='user_auth'),
+    re_path(r'^user_auth', TemplateView.as_view(template_name='user_auth.html'), name='user_auth'),
     re_path(r'^get_access_token', views.get_accesstoken), #请求access token
 
 
