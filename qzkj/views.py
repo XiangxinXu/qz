@@ -33,14 +33,13 @@ def existed(openid):
         return False
 
 
-def get_accesstoken(request, _):
+def get_accesstoken(request):
     '''
     用code换取access token，然后获取用户资料.
     参考https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html
     '''
     logger.info(request)
     logger.info('xxx\n')
-    logger.info(_)
     data = request.POST.get(data, None)
     if data == None:
         return HttpResponse('code and state not got in server.')
