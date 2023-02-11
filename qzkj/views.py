@@ -22,7 +22,7 @@ def register(request, _):
     """
      `` request `` 请求对象
     """
-    return render(request, 'index.html')
+    return render(request, 'register.html')
 
 
 def existed(openid):
@@ -31,26 +31,6 @@ def existed(openid):
         return True
     except ObjectDoesNotExist:
         return False
-
-
-def show_user_info(openid):      
-    user = User.objects.get(user_name=openid)     
-    ctx = {'uname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}
-    
-    return render(request, 'user_info.html', context=ctx)
-
-
-def get_user_info(access_token, openid):
-    url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
-    response = requests.get(url)
-    responsedict = json.loads(response)
-    openid = responsedict['openid']
-
-    logger.info(response.text)
-    if existed(openid):
-        return show_user_info(openid)
-    else:
-        return render(request, 'register.html', context=responsedict)
 
 
 def get_accesstoken(request, _):
@@ -65,7 +45,19 @@ def get_accesstoken(request, _):
     response = json.loads(response)
     access_token = response['access_token']
     openid = response['openid']
-    get_user_info(access_token, openid)
+    
+    url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
+    response = requests.get(url)
+    responsedict = json.loads(response)
+    openid = responsedict['openid']
+
+    logger.info(response.text)
+    if existed(openid):
+        user = User.objects.get(user_name=openid)     
+        ctx = {'uname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}      
+        return render(request, 'user_info.html', context=ctx)
+    else:
+        return render(request, 'register.html', context=responsedict)
 
 
 class UserView(View):

@@ -31,7 +31,13 @@
                 data: JSON.stringify(context),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-            }).done().fail();
+            }).done(function(data, textStatus, xhr){
+                window.alert(textStatus);
+                
+            }).fail(function(xhr, textStatus, errorThrown){
+                window.alert('fail');
+                window.alert(textStatus);
+                window.alert(errorThrown);});
         }
         else{
             window.alert('code获取失败。');
