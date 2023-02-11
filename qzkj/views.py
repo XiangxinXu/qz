@@ -38,33 +38,31 @@ def get_accesstoken(request):
     用code换取access token，然后获取用户资料.
     参考https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html
     '''
-    logger.info('xxx')
-    data = request.POST.get('data', None)
-    logger.info(data)
-    if data == None:
+    code = request.POST.get('code', None)
+    if code == None:
         return HttpResponse('code and state not got in server.')
     url = "https://api.weixin.qq.com/sns/oauth2/access_token?\
             appid=wx71b3d2f26d40ecbc&secret=39ceb0e5030cb2d2ce2d705f75945b67\
-            &code={}&grant_type=authorization_code".format(data['code'])
+            &code={}&grant_type=authorization_code".format(code)
     
     response = requests.get(url)
     logger.info(response.text)
     response = json.loads(response)
     access_token = response['access_token']
     openid = response['openid']
-    
-    # 获取用户资料
-    url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
-    response = requests.get(url)
-    responsedict = json.loads(response)
-    openid = responsedict['openid']
 
-    logger.info(response.text)
     if existed(openid):
+        # 用户注册过，信息在数据库中
         user = User.objects.get(user_name=openid)     
         ctx = {'uname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}      
         return render(request, 'user_info.html', context=ctx)
     else:
+        # 获取用户资料
+        url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
+        response = requests.get(url)
+        responsedict = json.loads(response)
+        logger.info(response.text)
+        
         return render(request, 'register.html', context=responsedict)
 
 
