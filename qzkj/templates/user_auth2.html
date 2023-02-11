@@ -32,11 +32,12 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
             }).done(function(data, textStatus, xhr){
-                window.alert(textStatus);               
+                window.alert(textStatus); 
+                window.alert(data);
+                window.alert(xhr);              
             }).fail(function(xhr, textStatus, errorThrown){
-                window.alert('fail');
                 window.alert(textStatus);
-                window.alert(errorThrown);});
+            });
         }
         else{
             window.alert('code获取失败。');
