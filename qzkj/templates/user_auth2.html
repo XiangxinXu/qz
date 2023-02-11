@@ -24,7 +24,6 @@
         let state = getUrlParam("state");
         let context = {'code':code, 'state':state};
         if (code != null) {
-            window.alert(code);
             $.ajax({
                 url: '/get_access_token',
                 type: 'post',
@@ -32,8 +31,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
             }).done(function(data, textStatus, xhr){
-                window.alert(textStatus);
-                
+                window.alert(textStatus);               
             }).fail(function(xhr, textStatus, errorThrown){
                 window.alert('fail');
                 window.alert(textStatus);

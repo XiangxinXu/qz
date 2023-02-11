@@ -34,6 +34,9 @@ def existed(openid):
 
 
 def get_accesstoken(request, _):
+    logger.info(request)
+    logger.info('xxx\n')
+    logger.info(_)
     data = request.POST.get(data, None)
     if data == None:
         return HttpResponse('code and state not got in server.')
