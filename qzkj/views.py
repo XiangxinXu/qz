@@ -34,6 +34,10 @@ def existed(openid):
 
 
 def get_accesstoken(request, _):
+    '''
+    用code换取access token，然后获取用户资料.
+    参考https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html
+    '''
     logger.info(request)
     logger.info('xxx\n')
     logger.info(_)
@@ -49,6 +53,7 @@ def get_accesstoken(request, _):
     access_token = response['access_token']
     openid = response['openid']
     
+    # 获取用户资料
     url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
     response = requests.get(url)
     responsedict = json.loads(response)
