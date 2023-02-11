@@ -62,23 +62,29 @@
 </head>
 
 <body>
-    <div class="weui-cells__title">带跳转的列表项</div>
+    <div class="page">
+    <div class="page__hd">
+        <h1 class="page__title">List</h1>
+        <p class="page__desc">列表</p>
+    </div>
+
+    <div class="weui-cells__title">个人中心</div>
     <div class="weui-cells">
-        <a class="weui-cell  weui-cell_access" href="/user_auth.html">
+        <a class="weui-cell  weui-cell_access" href={% url 'user_auth' %}>
             <span class="weui-cell__bd">
                 <span>用户注册</span>
             </span>
             <span class="weui-cell__ft">
             </span>
         </a>
-        <a class="weui-cell  weui-cell_access" href="/user_auth.html">
+        <a class="weui-cell  weui-cell_access" href={% url 'user_auth' %}>
             <span class="weui-cell__bd">
                 <span>查看积分</span>
             </span>
             <span class="weui-cell__ft">
             </span>
         </a>
-        <a class="weui-cell  weui-cell_access" href="/user_auth.html">
+        <a class="weui-cell  weui-cell_access" href={% url 'user_auth' %}>
             <span class="weui-cell__bd">
                 <span>积分兑换</span>
             </span>
@@ -86,7 +92,7 @@
             </span>
         </a>
     </div>
-  
+</div>
 </body>
 
 <script src="https://mat1.gtimg.com/www/asset/lib/jquery/jquery/jquery-1.11.1.min.js"></script>
