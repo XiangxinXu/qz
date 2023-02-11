@@ -38,13 +38,15 @@ def get_accesstoken(request):
     用code换取access token，然后获取用户资料.
     参考https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html
     '''
-    logger.info(request)
+    logger.info('xxx')
     data = request.POST.get('data', None)
+    logger.info(data)
     if data == None:
         return HttpResponse('code and state not got in server.')
     url = "https://api.weixin.qq.com/sns/oauth2/access_token?\
             appid=wx71b3d2f26d40ecbc&secret=39ceb0e5030cb2d2ce2d705f75945b67\
             &code={}&grant_type=authorization_code".format(data['code'])
+    
     response = requests.get(url)
     logger.info(response.text)
     response = json.loads(response)
