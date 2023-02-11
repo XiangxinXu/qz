@@ -10,14 +10,16 @@
     <script>
         // 首次路由到该页面执行下面分支，第二次来就不执行该部分
         if(history.state == null){
-        history.pushState({firsttime: 'true'}, "");
-        // 重定向到自己，获取code。
-        window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?"+
+            window.alert('1');
+            history.pushState({firsttime: 'true'}, "");
+            // 重定向到自己，获取code。
+            window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?"+
                                 "appid=wx71b3d2f26d40ecbc&"+
                                 "redirect_uri=https%3A%2F%2Fdjango-cihh-20134-6-1315334785.sh.run.tcloudbase.com/user_auth.html&"+
-                                "response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+                                "response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
         }
         else{
+            window.alert(history.state);
             function getUrlParam(name) {
                 //构造一个含有目标参数的正则表达式对象
                 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
