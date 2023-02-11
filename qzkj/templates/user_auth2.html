@@ -25,7 +25,7 @@
         let context = {'code':code, 'state':state};
         if (code != null) {
             $.ajax({
-                url: '/get_access_token',
+                url: '/getaccess_token',
                 type: 'post',
                 data: JSON.stringify(context),
                 contentType: "application/json; charset=utf-8",
