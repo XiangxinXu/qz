@@ -45,10 +45,9 @@ def get_accesstoken(request):
     if code == None:
         return HttpResponse('code and state not got in server.')
     url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx71b3d2f26d40ecbc&secret=39ceb0e5030cb2d2ce2d705f75945b67&code={}&grant_type=authorization_code'.format(code)
-    logger.info(url)
     response = requests.get(url)
     logger.info(response.text)
-    response = json.loads(response)
+    response = json.loads(response.text)
     access_token = response['access_token']
     openid = response['openid']
 
