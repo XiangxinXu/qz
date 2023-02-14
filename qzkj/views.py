@@ -3,7 +3,7 @@ import logging
 import os
 import requests
 
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
 from django.views import View
@@ -64,7 +64,8 @@ def get_accesstoken(request):
         responsedict = json.loads(response.text)
         logger.info(response.text)
         
-        return render(request, 'register.html', context=responsedict)
+        #return render(request, 'register.html', context=responsedict)
+        return HttpResponseRedirect(reverse('register.html', kwargs=responsedict))
 
 
 class UserView(View):
