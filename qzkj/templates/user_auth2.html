@@ -32,10 +32,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
             }).done(function(data, textStatus, xhr){
-                window.alert(textStatus); 
                 window.alert(data);
-                window.alert(xhr); 
-                $().html(xhr);             
+                $().html(data);             
             }).fail(function(xhr, textStatus, errorThrown){
                 window.alert(textStatus);
             });
