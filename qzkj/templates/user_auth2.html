@@ -33,7 +33,7 @@
                 dataType: "json",
             }).done(function(data, textStatus, xhr){
                 window.alert(data);
-                $().html(data);             
+                $(document).html(data);             
             }).fail(function(xhr, textStatus, errorThrown){
                 window.alert(textStatus);
             });
