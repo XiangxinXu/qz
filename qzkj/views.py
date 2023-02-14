@@ -4,6 +4,7 @@ import os
 import requests
 
 from django.http import JsonResponse, HttpResponse
+from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
 from django.views import View
 from qzkj.models import User
