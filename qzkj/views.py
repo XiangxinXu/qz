@@ -6,7 +6,7 @@ import requests
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.views import View
 from qzkj.models import User
 from django.core.exceptions import ObjectDoesNotExist
