@@ -64,7 +64,7 @@ def get_accesstoken(request):
         responsedict = json.loads(response.text)
         logger.info(response.text)
         
-        return JsonResponse(render_to_string('register.html', context=responsedict))
+        return JsonResponse(render_to_string('register.html', context=responsedict), safe=False)
 
 
 class UserView(View):
