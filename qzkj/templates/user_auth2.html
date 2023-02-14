@@ -31,8 +31,7 @@
                 data: JSON.stringify(context),
                 contentType: "application/json; charset=utf-8",
             }).done(function(data, textStatus, xhr){
-                window.alert(data);
-                $(document).html(data);             
+                        
             }).fail(function(xhr, textStatus, errorThrown){
                 window.alert(textStatus);
             });
