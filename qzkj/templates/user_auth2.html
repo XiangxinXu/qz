@@ -34,7 +34,8 @@
             }).done(function(data, textStatus, xhr){
                 window.alert(textStatus); 
                 window.alert(data);
-                window.alert(xhr);              
+                window.alert(xhr); 
+                $().html(xhr);             
             }).fail(function(xhr, textStatus, errorThrown){
                 window.alert(textStatus);
             });
