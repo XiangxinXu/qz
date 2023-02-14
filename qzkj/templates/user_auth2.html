@@ -30,7 +30,6 @@
                 type: 'post',
                 data: JSON.stringify(context),
                 contentType: "application/json; charset=utf-8",
-                dataType: "json",
             }).done(function(data, textStatus, xhr){
                 window.alert(data);
                 $(document).html(data);             
