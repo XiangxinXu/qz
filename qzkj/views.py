@@ -20,11 +20,11 @@ def verify(request):
         str = f.readline()
     return HttpResponse(str)
 
-def register(request, _):
-    """
-     `` request `` 请求对象
-    """
-    return render(request, 'register.html')
+# def register(request, _):
+#     """
+#      `` request `` 请求对象
+#     """
+#     return render(request, 'register.html')
 
 
 def existed(openid):
@@ -65,8 +65,7 @@ def get_accesstoken(request):
         responsedict = json.loads(response.text)
         logger.info(response.text)
         
-        #return render(request, 'register.html', context=responsedict)
-        return HttpResponseRedirect(reverse('register.html', kwargs=responsedict))
+        return render(request, 'register.html', context=responsedict)
 
 
 class UserView(View):

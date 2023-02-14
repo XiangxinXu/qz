@@ -214,27 +214,16 @@
 
       }).done(function(data, textStatus, xhr){
       
-      if (data && data.msg !== undefined) {    
-        var cf = window.alert(data.msg);
-        href_str = '/user_info/' + $('#js_input1').val();
-        window.location.href = href_str;
-        return;
-      }
       if(data && data.error !== undefined){
         console.log(data);
-        console.log(data.error);
-        var cf = window.alert(data.error);
+        window.alert(data.error);
         clearForm();
         info_complete_interval = self.setInterval("info_complete()", 200);
         return;
       }
       }).fail(function(xhr, textStatus, errorThrown){
-      console.log(textStatus);
-      console.log(errorThrown);
-      
-      //   
-      // }
-    });
+        window.alert(textStatus);
+      });
 
   }
 
