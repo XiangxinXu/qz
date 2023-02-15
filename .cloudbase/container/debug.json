@@ -3,7 +3,8 @@
     {
       "name": "qz",
       "domain": "",
-      "ip": ""
+      "ip": "",
+      "containerId": "acdc8b4418a137ab22bdd81cf5e3471f7d9e3b96cbdc61be7071fe8c3f02f519"
     }
   ],
   "config": {
