@@ -26,7 +26,7 @@ def register(request, nick_name):
     '''
     注册页面
     '''
-    params = {nickname: nick_name}
+    params = {'nickname': nick_name}
     return render('register.html', context=params)
 
 
