@@ -27,7 +27,7 @@ def register(request, nick_name):
     注册页面
     '''
     params = {'nickname': nick_name}
-    return render('register.html', context=params)
+    return render(request, 'register.html', context=params)
 
 
 def existed(openid):
