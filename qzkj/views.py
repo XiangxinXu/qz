@@ -22,12 +22,11 @@ def verify(request):
     return HttpResponse(str)
 
 
-def register(request):
+def register(request, nick_name):
     '''
     注册页面
     '''
-    url = request.build_absolute_uri()
-    params = parse.parse_qs( parse.urlparse( url ).query )
+    params = {nickname = nick_name}
     return render('register.html', context=params)
 
 
