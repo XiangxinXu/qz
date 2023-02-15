@@ -22,6 +22,13 @@ def verify(request):
     return HttpResponse(str)
 
 
+def register(request, nickname):
+    '''
+    注册页面
+    '''
+    param = {'nickname': nickname}
+    return render(request, 'register.html', context=param)
+
 def existed(openid):
     try:
         res = User.objects.get(user_name=openid)
@@ -57,10 +64,7 @@ def get_accesstoken(request):
         # 获取用户资料
         url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
         response = requests.get(url)
-        responsedict = json.loads(response.text)
-        nickname = responsedict['nickname']
-        
-        return render(request, 'register.html', context=responsedict)
+        return JsonResponse(response.text)
 
 
 class RegisterView(View):
