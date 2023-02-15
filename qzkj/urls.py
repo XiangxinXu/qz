@@ -30,12 +30,12 @@ urlpatterns = [
     # 网站验证文件
     re_path(r'^MP_verify_yxSL8Vl2Cy7VfcHP.txt', views.verify),
     
-    #re_path(r'^register(/)?$', views.register),
-    re_path(r'^register_submit(/)?$', UserView.as_view()),
-    re_path(r'^user_info/(?P<user_n>.+)(/)?$', UserView.as_view()),
+    # 注册
+    re_path(r'^register/(?P<nickname>.+)$', views.register)
+    re_path(r'^register_submit(/)?$', RegisterView.as_view()),
 
     # 用户授权相关
-    re_path(r'^user_auth(/)?$', TemplateView.as_view(template_name='user_auth.html'), name='user_auth'),
+    #re_path(r'^user_auth(/)?$', TemplateView.as_view(template_name='user_auth.html'), name='user_auth'),
     re_path(r'^user_auth2', TemplateView.as_view(template_name='user_auth2.html')),
     re_path(r'^get_access_token', views.get_accesstoken), #请求access token
 

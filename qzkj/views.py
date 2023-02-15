@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import requests
+from urllib import parse
 
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
@@ -20,11 +21,14 @@ def verify(request):
         str = f.readline()
     return HttpResponse(str)
 
-# def register(request, _):
-#     """
-#      `` request `` 请求对象
-#     """
-#     return render(request, 'register.html')
+
+def register(request):
+    '''
+    注册页面
+    '''
+    url = request.build_absolute_uri()
+    params = parse.parse_qs( parse.urlparse( url ).query )
+    return render('register.html', context=params)
 
 
 def existed(openid):
@@ -63,12 +67,12 @@ def get_accesstoken(request):
         url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
         response = requests.get(url)
         responsedict = json.loads(response.text)
-        logger.info(response.text)
+        nickname = responsedict['nickname']
         
-        return render(request, 'register.html', context=responsedict)
+        return redirect('register/{}'.format(nickname))
 
 
-class UserView(View):
+class RegisterView(View):
     openid = ''
     nickname = ''
     telephone = ''

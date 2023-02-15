@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
 
   <title>授权页</title>
-</head>
-<body>
-    <script src="https://mat1.gtimg.com/www/asset/lib/jquery/jquery/jquery-1.11.1.min.js"></script>
+  <script src="https://mat1.gtimg.com/www/asset/lib/jquery/jquery/jquery-1.11.1.min.js"></script>
     <script>
         function getUrlParam(name) {
             //构造一个含有目标参数的正则表达式对象
@@ -31,7 +29,7 @@
                 data: JSON.stringify(context),
                 contentType: "application/json; charset=utf-8",
             }).done(function(data, textStatus, xhr){
-                        
+                window.alert(data);
             }).fail(function(xhr, textStatus, errorThrown){
                 window.alert(textStatus);
             });
@@ -40,4 +38,7 @@
             window.alert('code获取失败。');
         }
     </script>
+</head>
+<body>
+    
 </body>
