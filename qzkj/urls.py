@@ -31,7 +31,7 @@ urlpatterns = [
     re_path(r'^MP_verify_yxSL8Vl2Cy7VfcHP.txt', views.verify),
     
     # 注册
-    re_path(r'^register/(?P<nickname>.+)/?$', views.register),
+    re_path(r'^register/(?P<nickname>.+)/$', views.register),
     re_path(r'^register_submit(/)?$', RegisterView.as_view()),
 
     # 用户授权相关
