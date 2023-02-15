@@ -34,7 +34,7 @@
             // }).fail(function(xhr, textStatus, errorThrown){
             //     window.alert(textStatus);
             // });
-            const response = await fetch('get_access_token', {
+            fetch('get_access_token', {
                 method: 'POST',
                 headers: {
                 'Accept': 'application/json',
