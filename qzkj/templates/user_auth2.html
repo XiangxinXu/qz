@@ -43,7 +43,8 @@
                 body: JSON.stringify(context),
                 })
                 .then((response) => {
-                    let nk = response['nickname'];
+                    window.alert(response.json())
+                    let nk = response.body['nickname'];
                     let url = `/register/?nickname=${nk}`
                     window.location.href = url;
                 });
