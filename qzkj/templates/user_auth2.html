@@ -23,16 +23,25 @@
         let state = getUrlParam("state");
         let context = {'code':code, 'state':state};
         if (code != null) {
-            $.ajax({
-                url: '/get_access_token',
-                type: 'post',
-                data: JSON.stringify(context),
-                contentType: "application/json; charset=utf-8",
-            }).done(function(data, textStatus, xhr){
-                window.alert(data);
-            }).fail(function(xhr, textStatus, errorThrown){
-                window.alert(textStatus);
-            });
+            // $.ajax({
+            //     url: '/get_access_token',
+            //     type: 'post',
+            //     data: JSON.stringify(context),
+            //     contentType: "application/json; charset=utf-8",
+            // }).done(function(data, textStatus, xhr){
+            //     url = '/register.html/?nickname='
+            //     window.location.href = url;
+            // }).fail(function(xhr, textStatus, errorThrown){
+            //     window.alert(textStatus);
+            // });
+            const response = await fetch('get_access_token', {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(context),
+                }).then((response) => response.json()).then((data) => console.log(data));
         }
         else{
             window.alert('code获取失败。');

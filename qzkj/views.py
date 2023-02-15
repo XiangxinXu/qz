@@ -22,14 +22,6 @@ def verify(request):
     return HttpResponse(str)
 
 
-def register(request, nick_name):
-    '''
-    注册页面
-    '''
-    params = {'nickname': nick_name}
-    return render(request, 'register.html', context=params)
-
-
 def existed(openid):
     try:
         res = User.objects.get(user_name=openid)
@@ -68,7 +60,7 @@ def get_accesstoken(request):
         responsedict = json.loads(response.text)
         nickname = responsedict['nickname']
         
-        return redirect('register/{}'.format(nickname))
+        return render(request, 'register.html', context=responsedict)
 
 
 class RegisterView(View):
