@@ -119,7 +119,7 @@ class RegisterView(View):
             self.introducer = None
         else:             
             res = User.objects.filter(telephone=self.introducer)
-            if res1.exists():
+            if res.exists():
                 self.introducer = res[0]
             else:
                 return JsonResponse({'error': '介绍人不存在！'})
