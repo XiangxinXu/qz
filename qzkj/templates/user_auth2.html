@@ -33,10 +33,18 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    let nk = data.nickname;
-                    window.alert(nk);
-                    let url = `/register/?nickname=${nk}`
-                    window.location.href = url;
+                    if (data.exist){
+                        let nk = data.nickname;
+                        let score = data.uscore;
+                        let url = `/user_info/?nickname=${nk}&score=${score}`;
+                        window.location.href = url;
+                    }
+                    else{
+                        let nk = data.nickname;
+                        let openid = data.openid;
+                        let url = `/register/?openid=${openid}&nickname=${nk}`;
+                        window.location.href = url;
+                    }
                 });
         }
         else{

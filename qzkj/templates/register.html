@@ -121,7 +121,9 @@
     $("#commit_button").css("display", "none");
     $("#waiting_button").css("display", "flex");
 
-    let obj = {wx_nck:$("#js_input2").val(), intro:$('#js_input4').val()};
+    let nkn = $("#js_input2").val();
+    let intrd = $('#js_input4').val();
+    let obj = {wx_nck:nkn, intro:intrd, opid:"{{openid}}"};
     console.log(obj);
     $.ajax({
       url: '/register_submit',
@@ -131,11 +133,15 @@
       dataType: "json",
 
       }).done(function(data, textStatus, xhr){
-        
       if(data && data.error !== undefined){
         window.alert(data.error);
         clearForm();
         info_complete_interval = self.setInterval("info_complete()", 200);
+        return;
+      }
+      else{
+        window.alert(data.msg);
+        window.location.href = '/user_auth2';
       }
       }).fail(function(xhr, textStatus, errorThrown){
         window.alert(textStatus);

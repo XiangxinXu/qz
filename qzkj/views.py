@@ -27,7 +27,17 @@ def register(request, _):
     注册页面
     '''
     nickname = request.GET.get('nickname', None)
-    return render(request, 'register.html', context={'nickname':nickname})
+    openid = request.GET.get('openid', None)
+    return render(request, 'register.html', context={'nickname':nickname, 'openid':openid})
+
+
+def userinfo(request, _):
+    '''
+    用户信息显示
+    '''
+    nickname = request.GET.get('nickname', None)
+    score = request.GET.get('score', 0)
+    return render(request, 'user_info.html', context={'nickname':nickname, 'score': score})
 
 def existed(openid):
     try:
@@ -35,6 +45,20 @@ def existed(openid):
         return True
     except ObjectDoesNotExist:
         return False
+
+
+def get_user_info_from_wx(openid, access_token):
+    url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
+    response = requests.get(url)
+    response = json.loads(response.text)
+    response['exist'] = 0
+    return response
+
+
+def get_user_info_from_db(openid):
+    user = User.objects.get(user_name=openid)     
+    ctx = {'exist': 1, 'nickname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}   
+    return ctx
 
 
 def get_accesstoken(request):
@@ -57,15 +81,12 @@ def get_accesstoken(request):
 
     if existed(openid):
         # 用户注册过，信息在数据库中
-        user = User.objects.get(user_name=openid)     
-        ctx = {'uname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}      
-        return render(request, 'user_info.html', context=ctx)
+        ctx = get_user_info_from_db(openid)   
+        return JsonResponse(ctx)
     else:
         # 获取用户资料
-        url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
-        response = requests.get(url)
-        response = json.loads(response.text)
-        return JsonResponse(response)
+        ctx = get_user_info_from_wx(openid, access_token)
+        return JsonResponse(ctx)
 
 
 class RegisterView(View):
@@ -85,10 +106,8 @@ class RegisterView(View):
         try:
             body_unicode = request.body.decode('utf-8')
             body = json.loads(body_unicode)
-
-            self.openid = body["wx_num"]
-            self.nickname = body["wx_nck"]
-            self.telephone = body['telephone']
+            self.nickname = body['wx_nck']
+            self.openid = body["opid"]
             self.introducer = body['intro']
         except:
             return JsonResponse({'error': '哦吼，网络开小差了！'})  
@@ -96,21 +115,17 @@ class RegisterView(View):
         if self.introducer == '':
             self.introducer = None
         else:             
-            res1 = User.objects.filter(telephone=self.introducer)
+            res = User.objects.filter(telephone=self.introducer)
             if res1.exists():
-                self.introducer = res1[0]
+                self.introducer = res[0]
             else:
                 return JsonResponse({'error': '介绍人不存在！'})
-            # nickname = response['nickname']
-            # sex = response['sex']
-            # province = response['province']
-            # city = response['city']
-            # country = response['country']
-            # headimgurl = response['headimgurl']
+
         
-        user = User.objects.create(user_name=self.wx_num, nick_name=self.wx_nck, telephone=self.telephone, introducer=self.introducer)
+        user = User.objects.create(user_name=self.openid, telephone=self.telephone, introducer=self.introducer)
         user.save()
         return JsonResponse({'msg': '恭喜您注册成功！'})     
+
 
     
 
