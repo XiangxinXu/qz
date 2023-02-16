@@ -156,14 +156,16 @@
   }
 
   function clearForm(){
+    $("#js_input3").val('');
     $("#js_input4").val('');
   }
 
   function info_complete(){
     let input2 = $("#js_input2").val();
-    let v4 = $("#js_input4").val();
+    let input3 = $("#js_input3").val();
+    let input4 = $("#js_input4").val();
 
-    if(input2.length == 0 || !(/^1[3456789]\d{9}$/.test(v4))){
+    if(input2.length == 0 || !(/^1[3456789]\d{9}$/.test(input3))){
       $("#disabled_button").css("display", "flex");
       $("#commit_button").css("display", "none");
       $("#waiting_button").css("display", "none");
