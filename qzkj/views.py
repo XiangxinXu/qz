@@ -54,13 +54,12 @@ def get_user_info_from_wx(openid, access_token):
     url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
     response = requests.get(url)
     response = json.loads(response.text)
-    response['exist'] = 0
     return response
 
 
 def get_user_info_from_db(openid):
     user = User.objects.get(user_name=openid)     
-    ctx = {'exist': 1, 'nickname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}   
+    ctx = {'nickname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}   
     return ctx
 
 
@@ -84,11 +83,14 @@ def get_user_info(request):
 
     if existed(openid):
         # 用户注册过，信息在数据库中
+        logger.info(openid)
         ctx = get_user_info_from_db(openid)   
+        ctx['exist'] = 1
         return JsonResponse(ctx)
     else:
         # 从微信获取用户资料
         ctx = get_user_info_from_wx(openid, access_token)
+        ctx['exist'] = 0
         return JsonResponse(ctx)
 
 
@@ -111,6 +113,7 @@ class RegisterView(View):
             body = json.loads(body_unicode)
             self.nickname = body['wx_nck']
             self.openid = body["opid"]
+            self.telephone = body['pn']
             self.introducer = body['intro']
         except:
             return JsonResponse({'error': '哦吼，网络开小差了！'})  

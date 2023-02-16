@@ -90,7 +90,12 @@
                   <input id="js_input2" class="weui-input" value="{{nickname}}" disabled/>
               </div>
             </label>
-
+            <label for="js_input3" class="weui-cell weui-cell_active">
+              <div class="weui-cell__hd"><span class="weui-label">手机号</span></div>
+              <div class="weui-cell__bd">
+                  <input id="js_input3" class="weui-input" placeholder="请您填写手机号" />
+              </div>
+            </label>
             <label for="js_input4" class="weui-cell weui-cell_active">
               <div class="weui-cell__hd"><span class="weui-label">推荐人</span><div class="weui-cell__desc">选填</div></div>
               <div class="weui-cell__bd">
@@ -123,7 +128,8 @@
 
     let nkn = $("#js_input2").val();
     let intrd = $('#js_input4').val();
-    let obj = {wx_nck:nkn, intro:intrd, opid:"{{openid}}"};
+    let phone = $('js_input3').val();
+    let obj = {wx_nck:nkn, intro:intrd, pn:phone, opid:"{{openid}}"};
     console.log(obj);
     $.ajax({
       url: '/register_submit',
