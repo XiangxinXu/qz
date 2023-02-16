@@ -141,7 +141,7 @@
       }
       else{
         window.alert(data.msg);
-        window.location.href = '/user_auth2';
+        window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx71b3d2f26d40ecbc&redirect_uri=https%3A%2F%2Fdjango-cihh-20134-6-1315334785.sh.run.tcloudbase.com/user_auth2.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
       }
       }).fail(function(xhr, textStatus, errorThrown){
         window.alert(textStatus);
