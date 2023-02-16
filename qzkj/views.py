@@ -65,9 +65,9 @@ def get_accesstoken(request):
         url = 'https://api.weixin.qq.com/sns/userinfo?access_token={}&openid={}&lang=zh_CN'.format(access_token, openid)
         response = requests.get(url)
         logger.info('xxx')
-        logger.info(response)
+        logger.info(response.text)
         response = json.loads(response.text)
-        
+        logger.info(responses)
         return JsonResponse(response)
 
 
