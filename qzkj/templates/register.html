@@ -121,7 +121,7 @@
     $("#commit_button").css("display", "none");
     $("#waiting_button").css("display", "flex");
 
-    let obj = {wx_num:$("#js_input1").val(), wx_nck:$("#js_input2").val(), telephone:$("#js_input3").val(), intro:$('#js_input4').val()};
+    let obj = {wx_nck:$("#js_input2").val(), intro:$('#js_input4').val()};
     console.log(obj);
     $.ajax({
       url: '/register_submit',
@@ -131,12 +131,11 @@
       dataType: "json",
 
       }).done(function(data, textStatus, xhr){
-      
+        
       if(data && data.error !== undefined){
         window.alert(data.error);
         clearForm();
         info_complete_interval = self.setInterval("info_complete()", 200);
-        return;
       }
       }).fail(function(xhr, textStatus, errorThrown){
         window.alert(textStatus);
@@ -145,29 +144,23 @@
   }
 
   function clearForm(){
-    var ips = $('input');
-    ips.each(function(id, element){
-      ips.eq(id).val('');
-    });
+    $("#js_input4").val('');
   }
 
   function info_complete(){
-    let input1 = $("#js_input1").val();
     let input2 = $("#js_input2").val();
-    let v3 = $("#js_input3").val();
+    let v4 = $("#js_input4").val();
 
-    if(input1.length == 0 || input2.length == 0 || !(/^1[3456789]\d{9}$/.test(v3))){
+    if(input2.length == 0 || !(/^1[3456789]\d{9}$/.test(v4))){
       $("#disabled_button").css("display", "flex");
       $("#commit_button").css("display", "none");
       $("#waiting_button").css("display", "none");
       return;
-    }
-       
+    }      
     $("#commit_button").css("display", "flex");
     $('#waiting_button').css("display", "none");
     $("#disabled_button").css("display", "none");
     return;
-    
   }
 
 </script>
