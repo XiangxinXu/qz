@@ -116,6 +116,7 @@ class RegisterView(View):
             self.openid = body["opid"]
             self.telephone = body['pn']
             self.introducer = body['intro']
+            logger(body)
         except:
             return JsonResponse({'error': '哦吼，网络开小差了！'})  
             
