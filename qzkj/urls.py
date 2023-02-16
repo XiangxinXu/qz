@@ -39,7 +39,10 @@ urlpatterns = [
     re_path(r'^get_user_info', views.get_user_info), #请求access token
 
     # 用户信息相关
-    re_path(r'user_info(/)?', views.userinfo),
+    re_path(r'^user_info(/)?', views.userinfo),
+
+
+    re_path(r'^score_rules', TemplateView.as_view(template_name='score_rules.html')),
 
     # 默认主页
     re_path(r'^(/)?$', TemplateView.as_view(template_name='index.html')),
