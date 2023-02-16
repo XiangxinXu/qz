@@ -22,7 +22,7 @@ def verify(request):
     return HttpResponse(str)
 
 
-def register(request):
+def register(request, _):
     '''
     注册页面
     '''
