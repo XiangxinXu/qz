@@ -100,7 +100,7 @@ class RegisterView(View):
     nickname = ''
     telephone = ''
     introducer = None
-    score_nowithdraw = 0
+    score_nowithdraw = 30
     score_withdrawable = 0
 
     def post(self, request, _):
@@ -127,7 +127,7 @@ class RegisterView(View):
                 return JsonResponse({'error': '介绍人不存在！'})
 
         
-        user = User.objects.create(user_name=self.openid, nick_name = self.nickname, telephone=self.telephone, introducer=self.introducer)
+        user = User.objects.create(user_name=self.openid, nick_name = self.nickname, telephone=self.telephone, introducer=self.introducer, score_nowithdraw=self.score_nowithdraw)
         user.save()
         return JsonResponse({'msg': '恭喜您注册成功！'})     
 
