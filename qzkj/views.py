@@ -40,6 +40,9 @@ def userinfo(request, _):
     return render(request, 'user_info.html', context={'nickname':nickname, 'score': score})
 
 def existed(openid):
+    '''
+    判断自己数据库中是否有用户信息
+    '''
     try:
         res = User.objects.get(user_name=openid)
         return True
@@ -61,7 +64,7 @@ def get_user_info_from_db(openid):
     return ctx
 
 
-def get_accesstoken(request):
+def get_user_info(request):
     '''
     用code换取access token，然后获取用户资料.
     参考https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html
@@ -84,7 +87,7 @@ def get_accesstoken(request):
         ctx = get_user_info_from_db(openid)   
         return JsonResponse(ctx)
     else:
-        # 获取用户资料
+        # 从微信获取用户资料
         ctx = get_user_info_from_wx(openid, access_token)
         return JsonResponse(ctx)
 

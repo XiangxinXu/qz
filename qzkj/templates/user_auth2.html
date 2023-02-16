@@ -23,7 +23,7 @@
         let state = getUrlParam("state");
         let context = {'code':code, 'state':state};
         if (code != null) {
-            fetch('get_access_token', {
+            fetch('get_user_info', {
                 method: 'POST',
                 headers: {
                 'Accept': 'application/json',
