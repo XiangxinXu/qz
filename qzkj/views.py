@@ -107,7 +107,7 @@ class RegisterView(View):
         '''
         注册
         '''
-        # logger.info('req: {}'.format(request.body))
+        logger.info('            req: {}'.format(request.body))
         
         try:
             body_unicode = request.body.decode('utf-8')
