@@ -22,12 +22,12 @@ def verify(request):
     return HttpResponse(str)
 
 
-def register(request, nickname):
+def register(request):
     '''
     注册页面
     '''
-    param = {'nickname': nickname}
-    return render(request, 'register.html', context=param)
+    nickname = request.GET.get('nickname', None)
+    return render(request, 'register.html', context={'nickname':nickname})
 
 def existed(openid):
     try:
@@ -67,7 +67,7 @@ def get_accesstoken(request):
         logger.info('xxx')
         logger.info(response.text)
         response = json.loads(response.text)
-        logger.info(responses)
+        logger.info(response)
         return JsonResponse(response)
 
 
