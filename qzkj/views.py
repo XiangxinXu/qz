@@ -107,8 +107,6 @@ class RegisterView(View):
         '''
         注册
         '''
-        logger.info('            req: {}'.format(request.body))
-        
         try:
             body_unicode = request.body.decode('utf-8')
             body = json.loads(body_unicode)
@@ -116,7 +114,6 @@ class RegisterView(View):
             self.openid = body["opid"]
             self.telephone = body['pn']
             self.introducer = body['intro']
-            logger.info(body)
         except:
             return JsonResponse({'error': '哦吼，网络开小差了！'})  
             
