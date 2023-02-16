@@ -128,7 +128,7 @@ class RegisterView(View):
                 return JsonResponse({'error': '介绍人不存在！'})
 
         
-        user = User.objects.create(user_name=self.openid, telephone=self.telephone, introducer=self.introducer)
+        user = User.objects.create(user_name=self.openid, nick_name = self.nickname, telephone=self.telephone, introducer=self.introducer)
         user.save()
         return JsonResponse({'msg': '恭喜您注册成功！'})     
 
