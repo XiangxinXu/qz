@@ -15,6 +15,7 @@
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Droid Sans", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
+      margin-top: 0;
     }
 
     .title-logo {
@@ -24,15 +25,17 @@
 
     @media screen and (min-width:1200px) {
       body {
-        margin-top: 160px;
+        /* margin-top: 160px; */
         margin-bottom: 272px;
+        margin-top: 0;
       }
     }
 
     @media screen and (max-width:1919px) {
       body {
-        margin-top: 76px;
+        /* margin-top: 76px; */
         margin-bottom: 128px;
+        margin-top: 0;
       }
     }
 
@@ -62,9 +65,9 @@
 </head>
 
 <body>
-  <div class="page form_page js_show" tabindex="-1">
+  <div class="page form_page js_show" tabindex="-1"  style="margin-top: 15%;">
   
-    <div style="display: flex; flex-direction: column; align-items: center;">
+    <div style="display: flex; flex-direction: column; align-items: center">
       <div class="title" >
         <img class="title-logo" src="{% static 'pic/qizunlogo.png' %}" />
         <div style="display: inline; margin-bottom: 48px;" class="title-text" >芪尊会员：{{nickname}}，您有{{score}}积分</div>
