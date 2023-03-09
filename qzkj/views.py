@@ -58,7 +58,7 @@ def get_user_info_from_wx(openid, access_token):
 
 
 def get_user_info_from_db(openid):
-    user = User.objects.get(user_name=openid)  
+    user = User.objects.get(openid=openid)  
     logger.info(user.nick_name)   
     ctx = {'nickname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}   
     return ctx
