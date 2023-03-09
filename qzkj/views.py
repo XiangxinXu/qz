@@ -39,12 +39,12 @@ def userinfo(request, _):
     score = request.GET.get('score', 0)
     return render(request, 'user_info.html', context={'nickname':nickname, 'score': score})
 
-def existed(openid):
+def existed(opid):
     '''
     判断自己数据库中是否有用户信息
     '''
     try:
-        res = User.objects.get(user_name=openid)
+        res = User.objects.get(openid=opid)
         return True
     except ObjectDoesNotExist:
         return False
@@ -57,8 +57,8 @@ def get_user_info_from_wx(openid, access_token):
     return response
 
 
-def get_user_info_from_db(openid):
-    user = User.objects.get(openid=openid)  
+def get_user_info_from_db(opid):
+    user = User.objects.get(openid=opid)  
     logger.info(user.nick_name)   
     ctx = {'nickname': user.nick_name, 'uscore': user.score_nowithdraw+user.score_withdrawable}   
     return ctx
@@ -96,7 +96,7 @@ def get_user_info(request):
 
 
 class RegisterView(View):
-    openid = ''
+    sopenid = ''
     nickname = ''
     telephone = ''
     introducer = None
@@ -111,7 +111,7 @@ class RegisterView(View):
             body_unicode = request.body.decode('utf-8')
             body = json.loads(body_unicode)
             self.nickname = body['wx_nck']
-            self.openid = body["opid"]
+            self.sopenid = body["opid"]
             self.telephone = body['pn']
             self.introducer = body['intro']
         except:
@@ -127,7 +127,7 @@ class RegisterView(View):
                 return JsonResponse({'error': '介绍人不存在！'})
 
         
-        user = User.objects.create(user_name=self.openid, nick_name = self.nickname, telephone=self.telephone, introducer=self.introducer, score_nowithdraw=self.score_nowithdraw)
+        user = User.objects.create(openid=self.sopenid, nick_name = self.nickname, telephone=self.telephone, introducer=self.introducer, score_nowithdraw=self.score_nowithdraw)
         user.save()
         return JsonResponse({'msg': '恭喜您注册成功！'})     
 
