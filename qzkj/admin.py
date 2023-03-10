@@ -12,5 +12,9 @@ class UserAdmin(admin.ModelAdmin):
     
 @admin.register(ScoreChangeLog)
 class ScoreChangeLogAdmin(admin.ModelAdmin):
-    list_display = ('openid', 'score_type')
+    list_display = ('openid', 'change_datetime', 'score_change', 'score_type')
+    readonly_fields = ('openid', 'change_datetime', 'score_change', 'score_type')
+    list_display_links = None
+
+
 
