@@ -1,11 +1,14 @@
 from django.contrib import admin
 from .models import User
 from .models import ScoreChangeLog
+import csv
+from django.http import HttpResponse
 
 
 admin.site.site_header = '芪尊科技后台管理系统'
 admin.site.site_title = '芪尊科技后台管理系统'
-admin.site.index_title = '芪尊科技后台管理系统'
+admin.site.index_title = '芪尊科技'
+admin.site.disable_action("delete_selected")
 
 class ExportCsvMixin:
     '''导出csv'''
@@ -27,7 +30,7 @@ class UserAdmin(admin.ModelAdmin, ExportCsvMixin):
     list_display = ('nick_name', 'telephone', 'openid', 'introducer', 'score_nowithdraw', 'score_withdrawable')
     readonly_fields = ('openid', 'nick_name', 'telephone', 'introducer',)
     search_fields = ('nick_name', 'telephone')
-    actions = ["export_as_csv"]
+    actions = ["delete_selected", "export_as_csv"]
 
     
 @admin.register(ScoreChangeLog)
