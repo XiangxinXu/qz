@@ -6,7 +6,7 @@ from .models import ScoreChangeLog
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('nick_name', 'telephone', 'openid', 'introducer', 'score_nowithdraw', 'score_withdrawable')
-    readonly_fields = ('user_name', 'nick_name', 'telephone', 'introducer',)
+    readonly_fields = ('openid', 'nick_name', 'telephone', 'introducer',)
     search_fields = ('nick_name', 'telephone')
 
     
