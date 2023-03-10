@@ -23,17 +23,17 @@ class ScoreChangeLog(models.Model):
         BOTH = 'both'
         NO = 'nowithdraw'
         WI = 'withdrawable'
-    _score_type = models.CharField(max_length=15, choices = ScoreTypeChoices.choices, verbose_name='可否提现')
+    score_type = models.CharField(max_length=15, choices = ScoreTypeChoices.choices, verbose_name='可否提现')
 
     class Meta:
         verbose_name_plural = '积分变动详情'
         db_table = 'ScoreChangeLog'
 
-    def score_type(self):
+    def get_score_type(self):
         if self._score_type == ScoreTypeChoices.BOTH:
             return '混合积分'
         elif self._score_type == ScoreTypeChoices.NO:
             return '不可提现积分'
         else:
             return '可提现积分'
-    score_type.short_description = '积分形式'
+    get_score_type.short_description = '积分形式'
