@@ -30,9 +30,9 @@ class ScoreChangeLog(models.Model):
         db_table = 'ScoreChangeLog'
 
     def get_score_type(self):
-        if self.score_type == ScoreTypeChoices.BOTH:
+        if self.score_type == self.ScoreTypeChoices.BOTH:
             return '混合积分'
-        elif self.score_type == ScoreTypeChoices.NO:
+        elif self.score_type == self.ScoreTypeChoices.NO:
             return '不可提现积分'
         else:
             return '可提现积分'
