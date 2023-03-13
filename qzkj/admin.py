@@ -32,10 +32,14 @@ class ScoreChangeLogTabularInline(admin.TabularInline):
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin, ExportCsvMixin):
     list_display = ('nick_name', 'telephone', 'openid', 'introducer', 'score_nowithdraw', 'score_withdrawable')
-    readonly_fields = ('openid', 'nick_name', 'telephone', 'introducer',)
+    readonly_fields = ('openid', 'nick_name', 'telephone', 'introducer', 'score_nowithdraw', 'score_withdrawable')
     search_fields = ('nick_name', 'telephone')
     actions = ["delete_selected", "export_as_csv"]
     inlines = [ScoreChangeLogTabularInline]
+    fieldsets = [
+        (None, {'fields': ['openid', 'nick_name', 'telephone', 'introducer']}),
+        ('积分', {'fields': ['score_nowithdraw', 'score_withdrawable']}),
+    ]
 
     
 @admin.register(ScoreChangeLog)
