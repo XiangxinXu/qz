@@ -25,12 +25,17 @@ class ExportCsvMixin:
     export_as_csv.short_description = "导出csv"
 
 
+class ScoreChangeLogTabularInline(admin.TabularInline):
+    model = ScoreChangeLog
+
+
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin, ExportCsvMixin):
     list_display = ('nick_name', 'telephone', 'openid', 'introducer', 'score_nowithdraw', 'score_withdrawable')
     readonly_fields = ('openid', 'nick_name', 'telephone', 'introducer',)
     search_fields = ('nick_name', 'telephone')
     actions = ["delete_selected", "export_as_csv"]
+    inlines = [ScoreChangeLogTabularInline]
 
     
 @admin.register(ScoreChangeLog)
