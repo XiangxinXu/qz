@@ -15,7 +15,7 @@ class User(models.Model):
         db_table = 'User'
 
 class ScoreChangeLog(models.Model):
-    #openid = models.CharField(max_length=200, primary_key=True, verbose_name='微信id')
+    id = models.PositiveBigIntegerField(primary_key=True, verbose_name='微信id')
     openid= models.ForeignKey(User,null=False, default="", on_delete=models.CASCADE, verbose_name='微信id')
     change_datetime = models.DateTimeField(auto_now=True, verbose_name='时间')
     score_change = models.IntegerField(default=0, verbose_name='积分变动')
