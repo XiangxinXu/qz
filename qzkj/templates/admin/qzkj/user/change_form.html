@@ -1,0 +1,9 @@
+{% extends "adimin/change_form.html" %}
+{% block field_sets %}
+{% for fieldset in adminform %}
+  {% include "admin/includes/fieldset.html" %}
+  <li>
+    <a href="https://baidu.com">点击百度</a>
+  </li>
+{% endfor %}
+{% endblock %}
